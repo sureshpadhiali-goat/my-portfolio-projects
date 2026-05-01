@@ -1,1 +1,24 @@
-placeholder.txt
+import pandas as pd
+
+df = pd.read_csv("E:/personal document/placement program/student performance project/data/student-mat.csv", sep=';')
+
+print("Shape:", df.shape)
+df.head()
+df.info()
+df.describe()
+import matplotlib.pyplot as plt
+
+df['G3'].hist()
+plt.show()
+df.isnull().sum()
+df.to_csv("../data/clean_student_data.csv", index=False)
+import matplotlib.pyplot as plt
+
+plt.scatter(df['studytime'], df['G3'])
+plt.xlabel("Study Time")
+plt.ylabel("Final Grade")
+plt.show()
+df['pass'] = df['G3'].apply(lambda x: 1 if x >= 10 else 0)
+
+df['pass'].value_counts()
+df.to_csv("../data/final_student_data.csv", index=False)
